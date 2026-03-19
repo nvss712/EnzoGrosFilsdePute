@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localisation Cible Nette</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        body { font-family: 'JetBrains+Mono', monospace; }
+        .glitch { text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
+    </style>
+</head>
+<body class="relative bg-black text-white flex items-center justify-center min-h-screen overflow-hidden">
+
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60" 
+         style="background-image: url('enzo.jpg');"></div>
+
+    <div class="absolute inset-0 bg-black/70 z-0"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-2xl">
+        <div class="mb-6 inline-block px-3 py-1 border border-red-500 text-red-500 text-xs tracking-[0.3em] uppercase animate-pulse">
+            Signal GPS Verrouillé
+        </div>
+        
+        <h2 class="text-gray-400 text-sm md:text-base tracking-[0.4em] mb-4">
+            48°52'16.4"N 2°30'07.6"E
+        </h2>
+
+        <h1 class="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight mb-8 glitch">
+            Le gros fils de pute est localisé ici exactement
+        </h1>
+
+        <div id="timer" class="flex gap-4 md:gap-8 justify-center items-center bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10">
+            </div>
+    </div>
+
+    <script>
+        const targetDate = new Date("March 20, 2026 21:30:00").getTime();
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('timer').innerHTML = "<span class='text-2xl text-red-500 animate-bounce'>CIBLE ATTEINTE</span>";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const format = (n) => String(n).padStart(2, '0');
+
+            const block = (val, label) => `
+                <div class="flex flex-col">
+                    <span class="text-3xl md:text-5xl font-black">${format(val)}</span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-500 mt-1">${label}</span>
+                </div>`;
+
+            document.getElementById('timer').innerHTML = 
+                block(d, 'Jours') + ":" + block(h, 'Hrs') + ":" + block(m, 'Min') + ":" + block(s, 'Sec');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
