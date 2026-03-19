@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localisation Cible Nette</title>
+    <title>Localisation Cible</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
@@ -11,14 +11,14 @@
         .glitch { text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
     </style>
 </head>
-<body class="relative bg-black text-white flex items-center justify-center min-h-screen overflow-hidden">
+<body class="relative bg-black text-white flex items-center justify-start min-h-screen overflow-hidden">
 
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60" 
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
          style="background-image: url('enzo.PNG');"></div>
 
-    <div class="absolute inset-0 bg-black/70 z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-10"></div>
 
-    <div class="relative z-10 text-center px-6 max-w-2xl">
+    <div class="relative z-20 px-10 md:px-20 max-w-3xl text-left">
         <div class="mb-6 inline-block px-3 py-1 border border-red-500 text-red-500 text-xs tracking-[0.3em] uppercase animate-pulse">
             Signal GPS Verrouillé
         </div>
@@ -31,7 +31,7 @@
             Le gros fils de pute est localisé ici exactement
         </h1>
 
-        <div id="timer" class="flex gap-4 md:gap-8 justify-center items-center bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10">
+        <div id="timer" class="flex gap-4 md:gap-8 justify-start items-center bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 w-fit">
             </div>
     </div>
 
@@ -43,7 +43,7 @@
             const diff = targetDate - now;
             
             if (diff <= 0) {
-                document.getElementById('timer').innerHTML = "<span class='text-2xl text-red-500 animate-bounce'>CIBLE ATTEINTE</span>";
+                document.getElementById('timer').innerHTML = "<span class='text-2xl text-red-500'>CIBLE ATTEINTE</span>";
                 return;
             }
 
@@ -55,7 +55,7 @@
             const format = (n) => String(n).padStart(2, '0');
 
             const block = (val, label) => `
-                <div class="flex flex-col">
+                <div class="flex flex-col items-start">
                     <span class="text-3xl md:text-5xl font-black">${format(val)}</span>
                     <span class="text-[9px] uppercase tracking-widest text-gray-500 mt-1">${label}</span>
                 </div>`;
